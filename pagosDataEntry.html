@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <section class="hero is-primary is-bold">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">Pago de Condominio</h1>
+        </div>
+      </div>
+    </section>
+    <form id="form" class="container m-4 pl-4" method="POST">
+      <div class="field">
+        <label class="label">Número de Apartamento</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="NROAPTO"
+            name="NROAPTO"
+          />
+        </div>
+      </div>
+
+      <!-- <div class="field">
+        <label class="label">Last Name</label>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Your Last Name"
+            name="Last Name"
+          />
+        </div>
+      </div> -->
+
+      <!-- <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input
+            class="input"
+            type="email"
+            placeholder="Your Email"
+            name="Email"
+          />
+        </div>
+      </div> -->
+
+      <div class="field">
+        <label class="label">Fecha de Pago</label>
+        <div class="control">
+          <input
+            class="input"
+                type="date"
+            placeholder="FECHAPAGO"
+            name="FECHAPAGO"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Bolivares</label>
+        <div class="control">
+          <input
+            class="input"
+            type=" number"
+            placeholder="BOLIVARES"
+            name="BOLIVARES"
+          />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Dolares</label>
+        <div class="control">
+          <input
+            class="input"
+            type=" number"
+            placeholder="DOLARES"
+            name="DOLARES"
+          />
+        </div>
+        <div class="field">
+          <label class="label">Tipo de cambio del día</label>
+          <div class="control">
+            <input
+              class="input"
+              type=" number"
+              placeholder="TIPOCAMBIO"
+              name="TIPOCAMBIO"
+            />
+          </div>
+
+          <div class="field">
+            <label class="label">Número de comprobante bancario</label>
+            <div class="control">
+              <input
+                class="input"
+                type=" number"
+                placeholder="NUMCOMPROBANTE"
+                name="NROCOMPROBANTE"
+              />
+            </div>
+
+            <div class="field">
+              <label class="label">Mes a pagar</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type=" number"
+                  placeholder="MES"
+                  name="MES"
+                />
+              </div>
+
+              <div class="field">
+                <label class="label">Año a  pagar</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type=" number"
+                    placeholder="ANO"
+                    name="ANO"
+                  />
+                </div>
+
+                <div class="field">
+                  <label class="label">Fecha del Dia</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                          type="date"
+                      placeholder="FECHADIA"
+                      name="FECHADIA"
+                    />
+                  </div>
+                </div>
+      <!-- </div>
+      <div class="field">
+        <label class="label">Gender</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" name="Gender" value="male" /> Male
+          </label>
+          <label class="radio">
+            <input type="radio" name="Gender" value="female" /> Female
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Agree to Terms</label>
+        <div class="control">
+          <label class="checkbox">
+            <input type="checkbox" name="Agree To Terms" value="yes" /> I agree
+            to the terms and conditions
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Additional Information</label>
+        <div class="control">
+          <textarea
+            class="textarea"
+            placeholder="Any additional information"
+            name="Notes"
+          ></textarea>
+        </div>
+      </div> -->
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-primary" type="submit" id="submit-button">
+            Enviar
+          </button>
+        </div>
+        <div class="control">
+          <button class="button is-danger">Cancelar</button>
+        </div>
+      </div>
+    </form>
+    <div
+      id="message"
+      style="
+        display: none;
+        margin: 20px;
+        font-weight: bold;
+        color: green;
+        padding: 8px;
+        background-color: beige;
+        border-radius: 4px;
+        border-color: aquamarine;
+      "
+    ></div>
+
+    <script>
+      document.getElementById("form").addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent the default form submission
+        document.getElementById("message").textContent = "Submitting..";
+        document.getElementById("message").style.display = "block";
+        document.getElementById("submit-button").disabled = true;
+
+        // Collect the form data
+        var formData = new FormData(this);
+        var keyValuePairs = [];
+        for (var pair of formData.entries()) {
+          keyValuePairs.push(pair[0] + "=" + pair[1]);
+        }
+
+        var formDataString = keyValuePairs.join("&");
+
+        // Send a POST request to your Google Apps Script
+       //  "https://script.google.com/macros/s/AKfycbwZ1xEvwJlLLH6YwkfduBQTP5lxZPAtt0vqxcRa8xx-NpUYwDe1PVdQwoxz3hKq29yV/exec",
+        fetch(
+              "https://script.google.com/macros/s/AKfycbx1H68aNe4yrw4FpmIaxMNLuwISQHOaI4MIo_b6IGYzt3Im7UJ0dg-mO10BBze6DRd0WQ/exec",
+          {
+            redirect: "follow",
+            method: "POST",
+            body: formDataString,
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8",
+            },
+          }
+        )
+          .then(function (response) {
+            // Check if the request was successful
+            if (response) {
+              return response; // Assuming your script returns JSON response
+            } else {
+              throw new Error("Failed to submit the form.");
+            }
+          })
+          .then(function (data) {
+            // Display a success message
+            document.getElementById("message").textContent =
+              "Data submitted successfully!";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("message").style.backgroundColor = "green";
+            document.getElementById("message").style.color = "beige";
+            document.getElementById("submit-button").disabled = false;
+            document.getElementById("form").reset();
+
+            setTimeout(function () {
+              document.getElementById("message").textContent = "";
+              document.getElementById("message").style.display = "none";
+            }, 2600);
+          })
+          .catch(function (error) {
+            // Handle errors, you can display an error message here
+            console.error(error);
+            document.getElementById("message").textContent =
+              "An error occurred while submitting the form.";
+            document.getElementById("message").style.display = "block";
+          });
+      });
+    </script>
+  </body>
+</html>
